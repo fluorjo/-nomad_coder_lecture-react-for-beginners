@@ -22,7 +22,9 @@
       */
       const [counter, setCounter] = React.useState(0);
       const onClick = () => {
-        setCounter(counter + 1);
+        //setCounter(counter+1);
+        setCounter(current=>current+1);
+        //이 코드가 더 안전하다. current가 현재 값임을 확실히 보장한다. 
       };
       return (
         <div>
