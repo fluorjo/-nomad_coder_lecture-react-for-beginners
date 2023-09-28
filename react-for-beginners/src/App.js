@@ -1,37 +1,46 @@
 import { useState, useEffect } from "react";
 
-function App() {
-  const [counter, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("");
-  const onClick = () => setValue((prev) => prev + 1);
-  const onChange = (event) => setKeyword(event.target.value);
-  // console.log("run all the time");
+/* function Hello() {
+  //component를 없애고 만들고를 반복하기 때문에 showing이 true여서 hello가 생성될 때만 use effect가 실행됨.
   useEffect(() => {
-    console.log("run only once. call api");
+    console.log("created");
+    //clean up function. component가 destroyed 될 때 실행됨.
+    return () => console.log("destroyed");
   }, []);
-  // const iRunOnlyOnce =()=>{
-  //   console.log('run only once');
-  // }
-  // useEffect(iRunOnlyOnce, [])
+  return <h1>Hello</h1>;
+} */
+
+function Hello() {
+  /*  function byeFn() {
+    console.log("destroyed");
+  }
+  function hiFn() {
+    console.log("created");
+    return byeFn;
+  }
+  */
   useEffect(() => {
-    console.log("run when keyword changes", keyword);
-  }, [keyword]);
-  useEffect(() => {
-    console.log("run when counter changes", keyword);
-  }, [counter]);
-  useEffect(() => {
-    console.log("run when keyword & counter change");
-  }, [keyword, counter]);
+    console.log("hihi");
+    return () => console.log("bye");
+  });
+
+  /*  useEffect(function () {
+    console.log("hihi");
+    return function () {
+      console.log("bye");
+    };
+  });*/
+  return <h1>Hello</h1>;
+}
+
+function App() {
+  const [showing, setShowing] = useState(false);
+  const onClick = () => setShowing((prev) => !prev);
+
   return (
     <div>
-      <input
-        value={keyword}
-        onChange={onChange}
-        type="text"
-        placeholder="Search here"
-      />
-      <h1>{counter}</h1>
-      <button onClick={onClick}>click me</button>
+      {showing ? <Hello /> : null}
+      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
     </div>
   );
 }
